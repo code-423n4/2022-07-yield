@@ -1,0 +1,15 @@
+{
+  "description": "Yield Collateralized Debt Engine v2",
+  "author": "Yield Inc.",
+  "repository": {
+    "url": "git+https://github.com/yieldprotocol/vault-v2.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/yieldprotocol/vault-v2/issues"
+  },
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/yieldprotocol/vault-v2#readme",
+  "private": "true",
+  "workspaces": ["packages/*"]
+}
