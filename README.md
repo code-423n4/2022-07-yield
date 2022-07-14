@@ -121,7 +121,6 @@ We implement all of our governance changes through a multi-layered process to el
 There is a balance between achieving the minimum gas cost, and make code readable enough to be understood and make bugs easier to find. We will reject any gas-saving suggestions that harm readability, unless they save gas in the thousands per transaction.
 
 ## Building and Testing
-
 This project uses foundry for tests. To build and test:
  - Run `forge install`
  - Run `forge build`
