@@ -1,0 +1,192 @@
+Witch._updateAccounting(bytes12,DataTypes.Auction,uint256,uint256) (contracts/Witch.sol#409-459) uses a dangerous strict equality:
+	- auction_.art == artIn (contracts/Witch.sol#425)
+Witch.calcPayout(bytes12,address,uint256) (contracts/Witch.sol#528-559) uses a dangerous strict equality:
+	- auction_.start == 0 (contracts/Witch.sol#545)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+
+Reentrancy in Witch._updateAccounting(bytes12,DataTypes.Auction,uint256,uint256) (contracts/Witch.sol#409-459):
+	External calls:
+	- _auctionEnded(vaultId,auction_.owner) (contracts/Witch.sol#427)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+	State variables written after the call(s):
+	- limits[auction_.ilkId][auction_.baseId] = limits_ (contracts/Witch.sol#455)
+Reentrancy in Witch.cancel(bytes12) (contracts/Witch.sol#253-264):
+	External calls:
+	- require(bool,string)(cauldron.level(vaultId) >= 0,Undercollateralized) (contracts/Witch.sol#256)
+	- _auctionEnded(vaultId,auction_.owner) (contracts/Witch.sol#261)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+	State variables written after the call(s):
+	- _auctionEnded(vaultId,auction_.owner) (contracts/Witch.sol#261)
+		- delete auctions[vaultId] (contracts/Witch.sol#270)
+Reentrancy in Witch.payBase(bytes12,address,uint128,uint128) (contracts/Witch.sol#286-333):
+	External calls:
+	- artIn = uint128(cauldron.debtFromBase(auction_.seriesId,maxBaseIn)) (contracts/Witch.sol#303-305)
+	- baseIn = cauldron.debtToBase(auction_.seriesId,artIn) (contracts/Witch.sol#309)
+	- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#316-321)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+		- cauldron.slurp(vaultId,inkOut.u128(),artIn.u128()) (contracts/Witch.sol#458)
+	State variables written after the call(s):
+	- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#316-321)
+		- delete auctions[vaultId] (contracts/Witch.sol#270)
+		- auctions[vaultId] = auction_ (contracts/Witch.sol#447)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+
+Witch._auctionStarted(bytes12) (contracts/Witch.sol#214-218) ignores return value by cauldron.give(vaultId,address(this)) (contracts/Witch.sol#216)
+Witch._auctionEnded(bytes12,address) (contracts/Witch.sol#268-272) ignores return value by cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+Witch.payBase(bytes12,address,uint128,uint128) (contracts/Witch.sol#286-333) ignores return value by baseJoin.join(msg.sender,baseIn.u128()) (contracts/Witch.sol#329)
+Witch._payInk(DataTypes.Auction,address,uint256,uint256) (contracts/Witch.sol#386-405) ignores return value by ilkJoin.exit(auction_.auctioneer,auctioneerCut.u128()) (contracts/Witch.sol#399)
+Witch._payInk(DataTypes.Auction,address,uint256,uint256) (contracts/Witch.sol#386-405) ignores return value by ilkJoin.exit(to,liquidatorCut.u128()) (contracts/Witch.sol#403)
+Witch._updateAccounting(bytes12,DataTypes.Auction,uint256,uint256) (contracts/Witch.sol#409-459) ignores return value by cauldron.slurp(vaultId,inkOut.u128(),artIn.u128()) (contracts/Witch.sol#458)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+
+Reentrancy in Witch._auctionEnded(bytes12,address) (contracts/Witch.sol#268-272):
+	External calls:
+	- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+	State variables written after the call(s):
+	- delete auctions[vaultId] (contracts/Witch.sol#270)
+Reentrancy in Witch.auction(bytes12,address) (contracts/Witch.sol#176-210):
+	External calls:
+	- require(bool,string)(cauldron.level(vaultId) < 0,Not undercollateralized) (contracts/Witch.sol#189)
+	State variables written after the call(s):
+	- auctions[vaultId] = auction_ (contracts/Witch.sol#207)
+	- limits[vault.ilkId][series.baseId] = limits_ (contracts/Witch.sol#205)
+Reentrancy in Witch.cancel(bytes12) (contracts/Witch.sol#253-264):
+	External calls:
+	- require(bool,string)(cauldron.level(vaultId) >= 0,Undercollateralized) (contracts/Witch.sol#256)
+	State variables written after the call(s):
+	- limits[auction_.ilkId][auction_.baseId].sum -= auction_.ink (contracts/Witch.sol#259)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+
+Reentrancy in Witch._auctionEnded(bytes12,address) (contracts/Witch.sol#268-272):
+	External calls:
+	- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+	Event emitted after the call(s):
+	- Ended(vaultId) (contracts/Witch.sol#271)
+Reentrancy in Witch._auctionStarted(bytes12) (contracts/Witch.sol#214-218):
+	External calls:
+	- cauldron.give(vaultId,address(this)) (contracts/Witch.sol#216)
+	Event emitted after the call(s):
+	- Auctioned(vaultId,uint32(block.timestamp)) (contracts/Witch.sol#217)
+Reentrancy in Witch.auction(bytes12,address) (contracts/Witch.sol#176-210):
+	External calls:
+	- require(bool,string)(cauldron.level(vaultId) < 0,Not undercollateralized) (contracts/Witch.sol#189)
+	- _auctionStarted(vaultId) (contracts/Witch.sol#209)
+		- cauldron.give(vaultId,address(this)) (contracts/Witch.sol#216)
+	Event emitted after the call(s):
+	- Auctioned(vaultId,uint32(block.timestamp)) (contracts/Witch.sol#217)
+		- _auctionStarted(vaultId) (contracts/Witch.sol#209)
+Reentrancy in Witch.cancel(bytes12) (contracts/Witch.sol#253-264):
+	External calls:
+	- require(bool,string)(cauldron.level(vaultId) >= 0,Undercollateralized) (contracts/Witch.sol#256)
+	- _auctionEnded(vaultId,auction_.owner) (contracts/Witch.sol#261)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+	Event emitted after the call(s):
+	- Cancelled(vaultId) (contracts/Witch.sol#263)
+	- Ended(vaultId) (contracts/Witch.sol#271)
+		- _auctionEnded(vaultId,auction_.owner) (contracts/Witch.sol#261)
+Reentrancy in Witch.payBase(bytes12,address,uint128,uint128) (contracts/Witch.sol#286-333):
+	External calls:
+	- artIn = uint128(cauldron.debtFromBase(auction_.seriesId,maxBaseIn)) (contracts/Witch.sol#303-305)
+	- baseIn = cauldron.debtToBase(auction_.seriesId,artIn) (contracts/Witch.sol#309)
+	- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#316-321)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+		- cauldron.slurp(vaultId,inkOut.u128(),artIn.u128()) (contracts/Witch.sol#458)
+	Event emitted after the call(s):
+	- Ended(vaultId) (contracts/Witch.sol#271)
+		- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#316-321)
+Reentrancy in Witch.payBase(bytes12,address,uint128,uint128) (contracts/Witch.sol#286-333):
+	External calls:
+	- artIn = uint128(cauldron.debtFromBase(auction_.seriesId,maxBaseIn)) (contracts/Witch.sol#303-305)
+	- baseIn = cauldron.debtToBase(auction_.seriesId,artIn) (contracts/Witch.sol#309)
+	- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#316-321)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+		- cauldron.slurp(vaultId,inkOut.u128(),artIn.u128()) (contracts/Witch.sol#458)
+	- _payInk(auction_,to,liquidatorCut,auctioneerCut) (contracts/Witch.sol#324)
+		- ilkJoin.exit(auction_.auctioneer,auctioneerCut.u128()) (contracts/Witch.sol#399)
+		- ilkJoin.exit(to,liquidatorCut.u128()) (contracts/Witch.sol#403)
+	- baseJoin.join(msg.sender,baseIn.u128()) (contracts/Witch.sol#329)
+	Event emitted after the call(s):
+	- Bought(vaultId,buyer,ink,art) (contracts/Witch.sol#469)
+		- _collateralBought(vaultId,to,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#332)
+Reentrancy in Witch.payFYToken(bytes12,address,uint128,uint128) (contracts/Witch.sol#344-383):
+	External calls:
+	- _updateAccounting(vaultId,auction_,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#368-373)
+		- cauldron.give(vaultId,owner) (contracts/Witch.sol#269)
+		- cauldron.slurp(vaultId,inkOut.u128(),artIn.u128()) (contracts/Witch.sol#458)
+	- _payInk(auction_,to,liquidatorCut,auctioneerCut) (contracts/Witch.sol#376)
+		- ilkJoin.exit(auction_.auctioneer,auctioneerCut.u128()) (contracts/Witch.sol#399)
+		- ilkJoin.exit(to,liquidatorCut.u128()) (contracts/Witch.sol#403)
+	- cauldron.series(auction_.seriesId).fyToken.burn(msg.sender,artIn) (contracts/Witch.sol#379)
+	Event emitted after the call(s):
+	- Bought(vaultId,buyer,ink,art) (contracts/Witch.sol#469)
+		- _collateralBought(vaultId,to,liquidatorCut + auctioneerCut,artIn) (contracts/Witch.sol#382)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+
+Witch.auction(bytes12,address) (contracts/Witch.sol#176-210) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(limits_.sum <= limits_.max,Collateral limit reached) (contracts/Witch.sol#200)
+Witch.payBase(bytes12,address,uint128,uint128) (contracts/Witch.sol#286-333) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(auction_.start > 0,Vault not under auction) (contracts/Witch.sol#300)
+	- baseIn != 0 (contracts/Witch.sol#325)
+	- require(bool,string)(baseJoin != IJoin(address(0)),Join not found) (contracts/Witch.sol#328)
+	- artIn > auction_.art (contracts/Witch.sol#308)
+Witch.payFYToken(bytes12,address,uint128,uint128) (contracts/Witch.sol#344-383) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(auction_.start > 0,Vault not under auction) (contracts/Witch.sol#358)
+	- artIn != 0 (contracts/Witch.sol#377)
+	- maxArtIn > auction_.art (contracts/Witch.sol#361)
+Witch._payInk(DataTypes.Auction,address,uint256,uint256) (contracts/Witch.sol#386-405) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(ilkJoin != IJoin(address(0)),Join not found) (contracts/Witch.sol#395)
+Witch._updateAccounting(bytes12,DataTypes.Auction,uint256,uint256) (contracts/Witch.sol#409-459) uses timestamp for comparisons
+	Dangerous comparisons:
+	- require(bool,string)(auction_.start > 0,Vault not under auction) (contracts/Witch.sol#416)
+	- auction_.art == artIn (contracts/Witch.sol#425)
+	- require(bool,string)(auction_.art - artIn >= debt.min * (10 ** debt.dec),Leaves dust) (contracts/Witch.sol#437-440)
+Witch.calcPayout(bytes12,address,uint256) (contracts/Witch.sol#528-559) uses timestamp for comparisons
+	Dangerous comparisons:
+	- auction_.start == 0 (contracts/Witch.sol#545)
+	- maxArtIn > auction_.art (contracts/Witch.sol#556)
+Witch._calcPayout(DataTypes.Auction,address,uint256) (contracts/Witch.sol#562-600) uses timestamp for comparisons
+	Dangerous comparisons:
+	- elapsed > duration (contracts/Witch.sol#586)
+	- auction_.auctioneer != to (contracts/Witch.sol#596)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#block-timestamp
+
+Different versions of Solidity are used:
+	- Version used: ['0.8.14', '^0.8.0']
+	- 0.8.14 (contracts/Witch.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/DataTypes.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/ICauldron.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/IFYToken.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/IJoin.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/ILadle.sol#2)
+	- ^0.8.0 (lib/vault-interfaces/src/IOracle.sol#2)
+	- ^0.8.0 (lib/yield-utils-v2/contracts/access/AccessControl.sol#3)
+	- ^0.8.0 (lib/yield-utils-v2/contracts/cast/CastU256U128.sol#2)
+	- ^0.8.0 (lib/yield-utils-v2/contracts/math/WDiv.sol#2)
+	- ^0.8.0 (lib/yield-utils-v2/contracts/math/WMul.sol#2)
+	- ^0.8.0 (lib/yield-utils-v2/contracts/token/IERC20.sol#3)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#different-pragma-directives-are-used
+
+Pragma version0.8.14 (contracts/Witch.sol#2) necessitates a version too recent to be trusted. Consider deploying with 0.6.12/0.7.6/0.8.7
+Pragma version^0.8.0 (lib/vault-interfaces/src/DataTypes.sol#2) allows old versions
+Pragma version^0.8.0 (lib/vault-interfaces/src/ICauldron.sol#2) allows old versions
+Pragma version^0.8.0 (lib/vault-interfaces/src/IFYToken.sol#2) allows old versions
+Pragma version^0.8.0 (lib/vault-interfaces/src/IJoin.sol#2) allows old versions
+Pragma version^0.8.0 (lib/vault-interfaces/src/ILadle.sol#2) allows old versions
+Pragma version^0.8.0 (lib/vault-interfaces/src/IOracle.sol#2) allows old versions
+Pragma version^0.8.0 (lib/yield-utils-v2/contracts/access/AccessControl.sol#3) allows old versions
+Pragma version^0.8.0 (lib/yield-utils-v2/contracts/cast/CastU256U128.sol#2) allows old versions
+Pragma version^0.8.0 (lib/yield-utils-v2/contracts/math/WDiv.sol#2) allows old versions
+Pragma version^0.8.0 (lib/yield-utils-v2/contracts/math/WMul.sol#2) allows old versions
+Pragma version^0.8.0 (lib/yield-utils-v2/contracts/token/IERC20.sol#3) allows old versions
+solc-0.8.14 is not recommended for deployment
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#incorrect-versions-of-solidity
+
+Witch.slitherConstructorConstantVariables() (contracts/Witch.sol#19-601) uses literals with too many digits:
+	- ROOT = 0x00000000 (lib/yield-utils-v2/contracts/access/AccessControl.sol#46)
+Witch.slitherConstructorConstantVariables() (contracts/Witch.sol#19-601) uses literals with too many digits:
+	- ROOT4146650865 = 0x00000000 (lib/yield-utils-v2/contracts/access/AccessControl.sol#47)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#too-many-digits
