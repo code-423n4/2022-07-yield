@@ -119,3 +119,17 @@ We implement all of our governance changes through a multi-layered process to el
 
 ### Gas vs. Readability
 There is a balance between achieving the minimum gas cost, and make code readable enough to be understood and make bugs easier to find. We will reject any gas-saving suggestions that harm readability, unless they save gas in the thousands per transaction.
+
+## Building and Testing
+
+This project uses foundry for tests. To build and test:
+ - Go to `packages/foundry`.
+ - Make sure the dependencies are there, and if not:
+   ```
+   rm lib/*
+   forge install yieldprotocol/yield-utils-v2
+   forge install yieldprotocol/vault-interfaces
+   forge install foundry-rs/forge-std
+   ```
+ - Run `forge build`
+ - Run `forge test`
