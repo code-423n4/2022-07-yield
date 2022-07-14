@@ -123,13 +123,6 @@ There is a balance between achieving the minimum gas cost, and make code readabl
 ## Building and Testing
 
 This project uses foundry for tests. To build and test:
- - Go to `packages/foundry`.
- - Make sure the dependencies are there, and if not:
-   ```
-   rm lib/*
-   forge install yieldprotocol/yield-utils-v2
-   forge install yieldprotocol/vault-interfaces
-   forge install foundry-rs/forge-std
-   ```
+ - Run `forge install`
  - Run `forge build`
  - Run `forge test`
