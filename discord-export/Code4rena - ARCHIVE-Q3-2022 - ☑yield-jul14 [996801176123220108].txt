@@ -1,0 +1,347 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q3-2022 / ☑yield-jul14
+==============================================================
+
+[07/13/2022 3:45 PM] kartoonjoy
+👋 Hello and welcome to the contest channel for the $25K USDC **Yield Witch v2** contest!
+
+📆 Contest opens 07/14/2022 8:00 PM (20:00 UTC) and runs through 07/17/2022 8:00 PM (20:00 UTC) (3 days).
+
+Please give a warm welcome to the Yield team, particularly @alcueca, @alfredo_contango, @Sabnock | Yield, @Pomeeeelo,  and @++devtooligan, who will be available for questions either here in the channel or via DM.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this contest, consider enabling notifications for this channel. 🐺 ⏰
+
+Contest Page: https://code4rena.com/contests/2022-07-yield-witch-v2-contest
+
+{Embed}
+https://code4rena.com/contests/2022-07-yield-witch-v2-contest
+Code4rena Yield Witch v2 contest
+$25,000 USDC
+14 July 2022—17 July 2022
+Code4rena - ARCHIVE-Q3-2022 - ☑yield-jul14 [996801176123220108].txt_Files/C4-banner-7C19B.png
+
+{Reactions}
+witch (8) 👋 (7) 
+
+[07/14/2022 12:39 AM] exd0tpy
+hm
+
+{Reactions}
+☀️ (7) 
+
+[07/14/2022 6:22 AM] Franfran#5067
+hm
+
+{Reactions}
+🔆 (2) 
+
+[07/15/2022 4:47 AM] horsefacts
+Just an aside, but I notice that the Witch uses both custom errors and `require` . Is there a philosophy there? Perhaps custom errors for parameterized errors, and `require` for everything else?
+
+
+[07/15/2022 5:19 AM] devtooligan
+not intentional afaik, we are experimenting with custom errors but haven't changed over completely
+
+{Reactions}
+thankyou 
+
+[07/15/2022 5:20 AM] kenzoagada
+Hey, maybe you can open friend requests for people from this server so we can ask you questions in private?
+
+
+[07/15/2022 5:22 AM] devtooligan
+i think mine r open but im actually logging off rn, i can respond tomorrow
+
+
+[07/15/2022 5:24 AM] kenzoagada
+Nope, I can't send a message nor add you as a friend
+
+
+[07/15/2022 8:01 AM] hellocccz
+```
+// If the world has not turned to ashes and darkness, auctions will malfunction on
+// the 7th of February 2106, at 06:28:16 GMT
+// TODO: Replace this contract before then :cold_sweat:
+// UPDATE: Added reminder to Google calendar :white_check_mark:
+```
+
+{Reactions}
+😂 (21) ❤️ (9) 
+
+[07/15/2022 8:13 AM] CRYP70#8985
+Gotta love the web3 community 😆
+
+{Reactions}
+❤️ (7) 
+
+[07/15/2022 9:10 AM] rajatbeladiya
+sent friend request @++devtooligan
+
+
+[07/15/2022 12:04 PM] alcueca
+My DMs are open
+
+
+[07/15/2022 12:37 PM] elku.cryptos
+ilkId - why is it named so? i wonder what "ilk" stands for...
+
+
+[07/15/2022 12:44 PM] alcueca
+Same as in MakerDAO, an `ilk` is a collateral. `ilkId` is the bytes6 identifier for the `ilk`
+
+
+[07/15/2022 12:45 PM] alcueca
+The Witch belongs in this repo, which you might find useful for context:
+https://github.com/yieldprotocol/vault-v2
+
+
+[07/15/2022 3:32 PM] hansfriese
+I sent a DM
+
+
+[07/15/2022 4:40 PM] alcueca
+Hey all, if I don't reply, please check with @Pomeeeelo, @++devtooligan or @themystery
+
+
+[07/15/2022 4:46 PM] alcueca
+If you can, a group DM would be best
+
+
+[07/15/2022 8:21 PM] hake_stake
+anyone available for DM @Pomeeeelo @alcueca @++devtooligan
+
+
+[07/15/2022 8:51 PM] devtooligan
+friend request sent fren
+
+{Reactions}
+👍 
+
+[07/15/2022 9:46 PM] pomeeeelo
+Shoot
+
+
+[07/15/2022 10:29 PM] nine_december
+Sent DM request
+
+{Reactions}
+👍 
+
+[07/16/2022 4:15 AM] elku.cryptos
+hello. anyone close to asian timezone among sponsors?
+
+
+[07/16/2022 4:37 AM] ak19966
+hi
+
+
+[07/16/2022 4:38 AM] ak19966
+can you pls be specific about which are all contract are in scope ?
+
+
+[07/16/2022 4:59 AM] alcueca
+Only Witch.sol is in scope
+
+{Reactions}
+👍 (3) 
+
+[07/16/2022 4:59 AM] alcueca
+@themystery is in an Asian timezone
+
+{Reactions}
+thankyou 
+
+[07/16/2022 5:06 AM] alcueca
+All, please be aware that all the other contracts in the Yield Protocol that the Witch integrates with are at https://github.com/yieldprotocol/vault-v2, and they are out of scope
+
+
+[07/16/2022 5:07 AM] alcueca
+And the docs for the wider protocol are at docs.yieldprotocol.com
+
+
+[07/16/2022 5:23 AM] .themystery
+Tell me
+
+
+[07/17/2022 1:39 AM] rokinot
+hi is any dev available for a DM rn?
+
+
+[07/17/2022 11:31 AM] ak19966
+hi.. can I DM you ?
+
+
+[07/17/2022 11:49 AM] ak19966
+its really hard to find the sponsors to get clarify queries...!!!!!!
+
+
+[07/17/2022 2:21 PM] .themystery
+Please ping me
+
+
+[07/17/2022 2:49 PM] nine_december
+Are u available?
+
+
+[07/17/2022 3:52 PM] .themystery
+Yup
+
+
+[07/17/2022 3:57 PM] nine_december
+Cant dm u
+
+
+[07/17/2022 3:57 PM] .themystery
+Sent friend request
+
+
+[07/17/2022 4:00 PM] nine_december
+Sent dm! Ty-
+
+
+[07/17/2022 8:02 PM] C4
+**🚨 CONTEST ALERT**
+
+@🐺wardens The **Yield Witch v2** contest is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: the **Yield** team will review the findings over the next couple of days, and then we'll pass them off to the judge. Keep an eye on #📢announcements for regular updates on how the contest is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a gardener if you have questions along the way!
+
+
+[08/10/2022 9:13 PM] TurnipBoy#5973
+https://github.com/code-423n4/code423n4.com/pull/3406/commits/ae3e44822ed27192d3067a8bb5b2e21838aa130f
+
+{Embed}
+https://github.com/code-423n4/code423n4.com/pull/3406/commits/ae3e44822ed27192d3067a8bb5b2e21838aa130f
+Update leaderboard for contest: Yield Witch v2 by code423n4 · Pull ...
+This auto-generated PR to the update the leaderboard
+Code4rena - ARCHIVE-Q3-2022 - ☑yield-jul14 [996801176123220108].txt_Files/81770958-D6E57
+
+
+[08/10/2022 10:45 PM] exd0tpy
+Wow.. only 2 of High accepted.
+
+
+[08/10/2022 11:17 PM] TurnipBoy#5973
+3 wardens got basically the whole pool...
+
+
+[08/10/2022 11:18 PM] TurnipBoy#5973
+@csanuragjain @antonttc @0x52
+
+{Reactions}
+👍 (4) 🎉 (7) ❤️ 
+
+[08/11/2022 8:35 AM] 0xsorrynotsorry
+Those highs are really impressive especially I admired the finding of @antonttc. Very well done mate 🔥  Inspiring.
+
+I can't disclose any further information due to code of conduct but I would seek for the completed report.
+
+{Reactions}
+❤️ ➕ (2) 
+
+[08/11/2022 8:57 AM] antonttc
+Thanks a lot for the compliment! I tried my best, felt lucky about that specific one tbh
+
+{Reactions}
+hi5 (5) thankyou 
+
+[08/15/2022 6:28 AM] rohan16
+hi yield witch v2 hasn't been mereged with the leaderboard yet instead before merging it has been deleted
+
+
+[08/17/2022 1:30 PM] itsmetechjay
+🤑 🎉 Awards for **Yield Witch v2**:
+
+$11,252.55 USDC » @csanuragjain 
+$5,083.03 USDC » @antonttc 
+$5,073.71 USDC » @0x52 
+$401.21 USDC » @hickuphh3 
+$320.93 USDC » @IllIllI 
+$229.10 USDC » @horsefacts 
+$138.16 USDC » @hake | SmartSek 
+$132.78 USDC » 0x29A (@anon, @Rotcivegaf)
+$118.61 USDC » @Meera 
+$109.82 USDC » @Waze 
+$95.50 USDC » @ak1 
+$83.86 USDC » @0xNazgul 
+$72.07 USDC » @rajatbeladiya 
+$65.42 USDC » @__141345__ 
+$65.03 USDC » @TomJ 
+$64.02 USDC » @rbserver 
+$60.51 USDC » @simon135 
+$59.94 USDC » @wastewa 
+$59.49 USDC » @Chom 
+$57.90 USDC » @kyteg 
+$56.74 USDC » @c3phas 
+$56.61 USDC » @Trumpero 
+$56.53 USDC » @ElKu 
+$56.46 USDC » @karanctf 
+$56.23 USDC » @cRat1st0s 
+$56.12 USDC » @rokinot 
+$56.11 USDC » @Deivitto 
+$55.93 USDC » @fatherOfBlocks 
+$55.93 USDC » @ReyAdmirado 
+$55.91 USDC » @pashov 
+$55.89 USDC » @SooYa 
+$46.40 USDC » @hyh 
+$44.80 USDC » @peritoflores 
+$41.28 USDC » @ladboy233小伙子 
+$40.44 USDC » @kenzo 
+$40.15 USDC » @PENGUN 
+$39.92 USDC » @hansfriese 
+$39.86 USDC » @joestakey 
+$39.31 USDC » @Sloth 
+$39.13 USDC » @lucyoa 
+$39.09 USDC » @delfin454000 
+$39.03 USDC » @Funen 
+$33.33 USDC » @m_Rassska 
+$23.75 USDC » @gogo 
+$20.97 USDC » @Limbooo 
+$20.07 USDC » @madwookie 
+$18.11 USDC » @0xKitsune 
+$17.85 USDC » @DefSec 
+$17.37 USDC » @samruna 
+$17.15 USDC » @JC
+$17.03 USDC » @JohnSmith 
+$16.99 USDC » @robee 
+$16.99 USDC » @sashik_eth 
+$16.94 USDC » @code-cipher 
+$16.89 USDC » @Tofunmi 
+$16.89 USDC » @ajtra 
+$16.89 USDC » @0x1f8b 
+$16.88 USDC » @bulej93 
+$16.88 USDC » @Sm4rty 
+$16.88 USDC » @Rohan 
+$16.87 USDC » @Ignacio 
+$16.87 USDC » @durianSausage 
+$16.87 USDC » @Kaiziron 
+
+🏁 Findings summary
+---------------------------
+High risk findings: 3 total, 2 unique
+Gas optimization reports: 50
+QA reports: 40
+
+Awards will be distributed on Polygon within the next 1-2 weeks. Congratulations all! 💸 💸 💸
+
+{Reactions}
+🎉 (15) C4Keycap (7) 😅 
+
+[08/27/2022 2:38 AM] karanctf
+rewards are out for this contest?
+
+
+[08/27/2022 3:07 AM] nine_k
+Not yet, should be in the next couple days.
+
+{Reactions}
+nice 
+
+[09/16/2022 12:17 AM] rokinot
+I'm very curious to read the report for this one, is it coming out soon?
+
+
+==============================================================
+Exported 51 message(s)
+==============================================================
